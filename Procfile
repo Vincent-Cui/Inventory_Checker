@@ -1,1 +1,1 @@
-web: bokeh serve --port=$PORT --address=0.0.0.0 --allow-websocket-origin=invent-check.herokuapp.com --use-xheaders Inventory_Checker.py
+worker: python Inventory_Checker.py
