@@ -1,1 +1,1 @@
-worker: python Inventory_Checker.py
+web: python Inventory_Checker.py
