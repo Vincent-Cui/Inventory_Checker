@@ -1,3 +1,10 @@
+'''
+
+Inventory Checker for Walmart & Target
+Version:0.2
+Author: Vincent Cui, Jinwen Xu
+
+'''
 import streamlit as st
 import requests
 import bs4
