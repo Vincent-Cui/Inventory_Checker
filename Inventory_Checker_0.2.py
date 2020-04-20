@@ -181,5 +181,5 @@ Released on: 19/04/2020
 
 Source code is available at: https://github.com/Vincent-Cui/Inventory_Checker
 
-Development Team: Wencong(Vincent) Cui, Jinwen Xu'
+Development Team: Wencong(Vincent) Cui, Jinwen Xu
 """)
