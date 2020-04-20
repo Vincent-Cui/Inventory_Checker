@@ -177,6 +177,8 @@ else:
 st.markdown("""
 Refresh page (or press F5) to start a new search
 
+Availability Data from Brickseek, may not reflect realtime stock for high-demand items
+
 Thank you for using Inventory Checker Version: 0.2
 
 Released on: 19/04/2020
