@@ -161,7 +161,7 @@ event_list
 if event_type == 'Walmart':
 	kw=st.text_input("Type in key word of your requested item: ")
 	DF = WalmartKeywords(str(kw))
-	st.table(DF)
+	st.table(DF['product'])
 	requestitem = st.number_input("Type in the index (number) of your requested item: ",0,100,1)
 	ZIP=st.number_input("Type in zipcode of your searching area: ",0,100000,1)
 	Walmart(requestitem, int(ZIP))
