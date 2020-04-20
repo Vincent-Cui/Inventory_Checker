@@ -68,6 +68,7 @@ def cache_on_button_press(label, **cache_kwargs):
 
 st.title("Walmart & Target Inventory Checker")
 
+
 @cache_on_button_press('Search')
 def WalmartKeywords(keywords):
 	url = "http://www.walmart.com/search/?query="
@@ -159,6 +160,8 @@ event_type = st.sidebar.selectbox(
 'Which one you want to check: ',
 event_list
 )
+st.sidebar.markdown('<img src="https://www.google-analytics.com/collect?v=1&tid=UA-71140139-2&cid=555&aip=1&t=event&ec=app&ea=open&dp=%2FApp%2Fnewsletter&dt=My%20Newsletter">',
+	unsafe_allow_html=True)
 
 if event_type == 'Walmart':
 	kw=st.text_input("Type in key word of your requested item: ")
