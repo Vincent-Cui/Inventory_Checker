@@ -3,4 +3,3 @@ bs4
 pandas
 lxml
 streamlit
-functools==0.4
