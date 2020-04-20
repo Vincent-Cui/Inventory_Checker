@@ -14,6 +14,7 @@ from distutils.filelist import findall
 import requests
 import re
 import pandas as pd
+import functools
 
 
 st.title("Walmart & Target Inventory Checker")
