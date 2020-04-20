@@ -88,7 +88,7 @@ def Walmart(requestitem, ZIP):
 	SKU=DF['sku'][int(requestitem)]
 	url = 'https://brickseek.com/walmart-inventory-checker/'
 	payload = {'search_method': 'sku', 'sku': SKU, 'zip': ZIP, 'sort': 'distance'}
-	df_record = pd.DataFrame(columns=['Store','City','Availability','Quantity'])
+	df_record = pd.DataFrame(columns=['Store','City','Distance','Availability','Quantity'])
 	r = requests.post(url, data=payload).text    # Make a POST request with data
 	
 	bs = BeautifulSoup(r, 'html.parser')
@@ -102,9 +102,11 @@ def Walmart(requestitem, ZIP):
 				m_Store = tag.findAll('strong', class_='address-location-name')
 				m=str(m_Store)
 				if  i < m.count('/strong'):
-					m_s= m_Store[i].get_text().replace("\nWalmart","")
+					m_s= m_Store[i].get_text().replace("\n","")
 					m_add = tag.findAll('address',class_="address")
-					m_Address = m_add[i].contents[2]      
+					m_Address = m_add[i].contents[2]
+					m_dist = tag.findAll('div',class_="address__below") 
+					m_d = m_dist[i].get_text().replace("(","").replace(" Away","").replace(")","")  
 					m_Availability = tag.findAll('span',class_="availability-status-indicator__text")
 					m_a = m_Availability[i].get_text()
 					if m_a =='Out of Stock'or m_a == 'Limited Stock':
@@ -114,7 +116,7 @@ def Walmart(requestitem, ZIP):
 						m_Quantity = tag.findAll('span',class_="table__cell-quantity")
 						m_q = m_Quantity[j].get_text()[9:]
 					j=j+1
-					df_record = df_record.append({'Store':m_s, 'City':m_Address, 'Availability':m_a, 'Quantity':m_q }, ignore_index=True)
+					df_record = df_record.append({'Store':m_s, 'City':m_Address, 'Distance':m_d, 'Availability':m_a, 'Quantity':m_q }, ignore_index=True)
 				else:
 					st.table(df_record)
 					if len(df_record) == 0:
