@@ -175,6 +175,8 @@ elif event_type == 'Target':
 else: 
 	print("Wrong input")
 st.markdown("""
+Refresh page (or press F5) to start a new search
+
 Thank you for using Inventory Checker Version: 0.2
 
 Released on: 19/04/2020
