@@ -172,9 +172,8 @@ if event_type == 'Walmart':
 	Walmart(requestitem, int(ZIP))
 	
 elif event_type == 'Target':
-	SKU=st.number_input("Type in DCPI of your requested item (you can find DCPI on target.com): ",1)
+	SKU=st.text_input("Type in DCPI of your requested item (you can find DCPI on target.com): ")
 	ZIP=st.number_input("Type in zipcode of your searching area: ",1)
-	
 	Target(SKU, int(ZIP))
 else: 
 	print("Wrong input")
