@@ -16,9 +16,6 @@ import re
 import pandas as pd
 import functools
 
-
-st.title("Walmart & Target Inventory Checker")
-
 def cache_on_button_press(label, **cache_kwargs):
     """Function decorator to memoize function executions.
     Parameters
@@ -68,6 +65,8 @@ def cache_on_button_press(label, **cache_kwargs):
             return cache_entry.return_value
         return wrapped_func
     return function_decorator
+
+st.title("Walmart & Target Inventory Checker")
 
 @cache_on_button_press('Search')
 def WalmartKeywords(keywords):
@@ -137,7 +136,7 @@ def Target(SKU, ZIP):
 	r = requests.post(url, data=payload).text    # Make a POST request with data
 
 	bs = BeautifulSoup(r, 'html.parser')
-	print(" Store                Availability      Quantity ")
+	st.write(" Store                Availability      Quantity ")
 	j=0
 	for tag in bs.find_all('div', class_='table__body'): 
 		for i in range(10):
@@ -152,31 +151,29 @@ def Target(SKU, ZIP):
 				m_a = m_Availability[i].get_text()
 				m_q = 'Unknown'
 				j=j+1
-				print( m_s+"   "  +  m_Address   + "      " + m_a + "        " + m_q ) 
+				st.write( m_s+"   "  +  m_Address   + "      " + m_a + "        " + m_q ) 
 			else:break
 				
-query = True
-while query == True:
-	event_list=['Walmart','Target']
-	event_type = st.sidebar.selectbox(
-	'Which one you want to check: ',
-	event_list
+event_list=['Walmart','Target']
+event_type = st.sidebar.selectbox(
+'Which one you want to check: ',
+event_list
 )
 
-	if event_type == 'Walmart':
-		kw=st.text_input("Type in key word of your requested item: ")
-		DF = WalmartKeywords(str(kw))
-		requestitem = st.number_input("Type in the index (number) of your requested item: ",0,100,1)
-		ZIP=st.number_input("Type in zipcode of your searching area: ",0,100000,1)
-		Walmart(requestitem, int(ZIP))
-		query = False
-	elif event_type == 'Target':
-		SKU=st.number_input("Type in DCPI of your requested item (you can find DCPI on target.com): ",1)
-		ZIP=st.number_input("Type in zipcode of your searching area: ",1)
-		query = False
-		Target(SKU, int(ZIP))
-	else: 
-		print("Wrong input")
+if event_type == 'Walmart':
+	kw=st.text_input("Type in key word of your requested item: ")
+	DF = WalmartKeywords(str(kw))
+	requestitem = st.number_input("Type in the index (number) of your requested item: ",0,100,1)
+	ZIP=st.number_input("Type in zipcode of your searching area: ",0,100000,1)
+	Walmart(requestitem, int(ZIP))
+	
+elif event_type == 'Target':
+	SKU=st.number_input("Type in DCPI of your requested item (you can find DCPI on target.com): ",1)
+	ZIP=st.number_input("Type in zipcode of your searching area: ",1)
+	
+	Target(SKU, int(ZIP))
+else: 
+	print("Wrong input")
 st.markdown("""
 Thank you for using Inventory Checker Version: 0.2
 
