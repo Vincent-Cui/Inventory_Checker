@@ -1,1 +1,1 @@
-web: python Inventory_Checker.py
+web: sh setup.sh && streamlit run Inventory_Checker_0.2.py
