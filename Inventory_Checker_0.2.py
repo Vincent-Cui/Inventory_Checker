@@ -9,6 +9,8 @@ import re
 import pandas as pd
 from utils import cache_on_button_press
 
+st.title("Walmart & Target Inventory Checker")
+
 @cache_on_button_press('Search')
 def WalmartKeywords(keywords):
 	url = "http://www.walmart.com/search/?query="
